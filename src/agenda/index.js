@@ -135,7 +135,8 @@ export default class AgendaView extends Component {
   }
 
   setScrollPadPosition(y, animated) {
-    this.scrollPad.getNode().scrollTo({x: 0, y, animated});
+    // https://github.com/wix/react-native-calendars/issues/1106
+    this.scrollPad.scrollTo({x: 0, y, animated});
   }
 
   onScrollPadLayout() {
@@ -225,6 +226,8 @@ export default class AgendaView extends Component {
   }
 
   componentWillUnmount() {
+    // https://github.com/wix/react-native-calendars/issues/1132
+    this.state.scrollY.removeAllListeners();
     this._isMounted = false;
   }
 
